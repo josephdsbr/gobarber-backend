@@ -6,6 +6,9 @@ import User from '../models/User';
 import File from '../models/File';
 import Notification from '../schemas/Notification';
 
+import CancellationMail from '../jobs/CancellationMail';
+import Queue from '../../lib/Queue';
+
 class AppointmentController {
   async index(req, res) {
     const { page = 1 } = req.query;
@@ -130,7 +133,20 @@ class AppointmentController {
   }
 
   async delete(req, res) {
-    const appointment = await Appointment.findByPk(req.params.id);
+    const appointment = await Appointment.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          as: 'provider',
+          attributes: ['name', 'email'],
+        },
+        {
+          model: User,
+          as: 'user',
+          attributes: ['name'],
+        },
+      ],
+    });
 
     /**
      * Check if User has permission to cancel appointment
@@ -143,8 +159,9 @@ class AppointmentController {
     }
 
     /**
-     *
+     * Check if user trying to cancel too late
      */
+
     const dateWithSub = subHours(appointment.date, 2);
 
     if (isBefore(dateWithSub, new Date())) {
@@ -156,6 +173,14 @@ class AppointmentController {
     appointment.canceled_at = new Date();
 
     await appointment.save(appointment);
+
+    /**
+     * Sending a email of cancel to provider
+     */
+
+    await Queue.add(CancellationMail.key, {
+      appointment,
+    });
 
     return res.json(appointment);
   }
