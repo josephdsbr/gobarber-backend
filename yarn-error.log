@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js build
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add express-brute express-bruto-redis
 
 PATH: 
-  C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\Docker\Docker\Resources\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Python27\;C:\Python27\Scripts;C:\Program Files\Microsoft MPI\Bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.7_3.7.1264.0_x64__qbz5n2kfra8p0;C:\ProgramData\chocolatey\bin;C:\Program Files\Java\jdk1.8.0_211\bin;C:\Program Files\Git\cmd;C:\Android\Sdk\platform-tools;C:\Android\Sdk\tools;C:\Program Files\Java\jdk1.8.0_221\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Users\vinicius\AppData\Local\Microsoft\WindowsApps;C:\Users\vinicius\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files (x86)\gretl;C:\Android\Sdk\platform-tools;C:\Android\Sdk\tools;;C:\Users\vinicius\AppData\Local\.meteor;C:\Users\vinicius\AppData\Roaming\npm
+  D:\Bootcamp\gobarber-backend\node_modules\.bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\Docker\Docker\Resources\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Python27\;C:\Python27\Scripts;C:\Program Files\Microsoft MPI\Bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.7_3.7.1264.0_x64__qbz5n2kfra8p0;C:\ProgramData\chocolatey\bin;C:\Program Files\Java\jdk1.8.0_211\bin;C:\Program Files\Git\cmd;C:\Android\Sdk\platform-tools;C:\Android\Sdk\tools;C:\Program Files\Java\jdk1.8.0_221\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Users\vinicius\AppData\Local\Microsoft\WindowsApps;C:\Users\vinicius\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files (x86)\gretl;C:\Android\Sdk\platform-tools;C:\Android\Sdk\tools;;C:\Users\vinicius\AppData\Local\.meteor;C:\Users\vinicius\AppData\Roaming\npm;C:\Users\vinicius\AppData\Roaming\TinyTeX\bin\win32;C:\Program Files\JetBrains\WebStorm 2019.3.1\bin;
 
 Yarn version: 
   1.21.1
@@ -14,12 +14,17 @@ Platform:
   win32 x64
 
 Trace: 
-  SyntaxError: D:\Bootcamp\gobarber-backend\package.json: Unexpected token } in JSON at position 327
-      at JSON.parse (<anonymous>)
-      at C:\Program Files (x86)\Yarn\lib\cli.js:1625:59
-      at Generator.next (<anonymous>)
-      at step (C:\Program Files (x86)\Yarn\lib\cli.js:310:30)
-      at C:\Program Files (x86)\Yarn\lib\cli.js:321:13
+  Error: https://registry.yarnpkg.com/express-bruto-redis: Not found
+      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:66056:18)
+      at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:140665:22)
+      at Request.emit (events.js:200:13)
+      at Request.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141637:10)
+      at Request.emit (events.js:200:13)
+      at IncomingMessage.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141559:12)
+      at Object.onceWrapper (events.js:288:20)
+      at IncomingMessage.emit (events.js:205:15)
+      at endReadableNT (_stream_readable.js:1137:12)
+      at processTicksAndRejections (internal/process/task_queues.js:84:9)
 
 npm manifest: 
   {
@@ -32,7 +37,8 @@ npm manifest:
       "queue": "nodemon src/queue.js",
       "dev:debug": "nodemon --inspect src/server.js",
       "build": "sucrase ./src -d ./dist --transforms imports",
-      "start": "node dist/server.js",
+      "lint": "eslint .",
+      "start": "node dist/server.js"
     },
     "dependencies": {
       "@sentry/node": "5.7.1",
@@ -45,6 +51,7 @@ npm manifest:
       "express-async-error": "^0.0.2",
       "express-async-errors": "^3.1.1",
       "express-handlebars": "^3.1.0",
+      "ioredis": "^4.14.1",
       "jsonwebtoken": "^8.5.1",
       "mongoose": "^5.7.7",
       "multer": "^1.4.2",
@@ -661,6 +668,11 @@ Lockfile:
       is-bluebird "^1.0.2"
       shimmer "^1.1.0"
   
+  cluster-key-slot@^1.1.0:
+    version "1.1.0"
+    resolved "https://registry.yarnpkg.com/cluster-key-slot/-/cluster-key-slot-1.1.0.tgz#30474b2a981fb12172695833052bc0d01336d10d"
+    integrity sha512-2Nii8p3RwAPiFwsnZvukotvow2rIHM+yQ6ZcBXGHdniadkYGZYiGmkHJIbZPIV9nfv7m/U1IPMVVcAhoWFeklw==
+  
   code-point-at@^1.0.0:
     version "1.1.0"
     resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
@@ -934,6 +946,11 @@ Lockfile:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/delegates/-/delegates-1.0.0.tgz#84c6e159b81904fdca59a0ef44cd870d31250f9a"
     integrity sha1-hMbhWbgZBP3KWaDvRM2HDTElD5o=
+  
+  denque@^1.1.0:
+    version "1.4.1"
+    resolved "https://registry.yarnpkg.com/denque/-/denque-1.4.1.tgz#6744ff7641c148c3f8a69c307e51235c1f4a37cf"
+    integrity sha512-OfzPuSZKGcgr96rf1oODnfjqBFmr1DVoc/TrItj3Ohe0Ah1C5WX5Baquw/9U9KovnQ88EqmJbD66rKYUQYN1tQ==
   
   depd@~1.1.2:
     version "1.1.2"
@@ -1916,6 +1933,21 @@ Lockfile:
       strip-ansi "^5.1.0"
       through "^2.3.6"
   
+  ioredis@^4.14.1:
+    version "4.14.1"
+    resolved "https://registry.yarnpkg.com/ioredis/-/ioredis-4.14.1.tgz#b73ded95fcf220f106d33125a92ef6213aa31318"
+    integrity sha512-94W+X//GHM+1GJvDk6JPc+8qlM7Dul+9K+lg3/aHixPN7ZGkW6qlvX0DG6At9hWtH2v3B32myfZqWoANUJYGJA==
+    dependencies:
+      cluster-key-slot "^1.1.0"
+      debug "^4.1.1"
+      denque "^1.1.0"
+      lodash.defaults "^4.2.0"
+      lodash.flatten "^4.4.0"
+      redis-commands "1.5.0"
+      redis-errors "^1.2.0"
+      redis-parser "^3.0.0"
+      standard-as-callback "^2.0.1"
+  
   ipaddr.js@1.9.0:
     version "1.9.0"
     resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.9.0.tgz#37df74e430a0e47550fe54a2defe30d8acd95f65"
@@ -2327,6 +2359,16 @@ Lockfile:
     dependencies:
       p-locate "^3.0.0"
       path-exists "^3.0.0"
+  
+  lodash.defaults@^4.2.0:
+    version "4.2.0"
+    resolved "https://registry.yarnpkg.com/lodash.defaults/-/lodash.defaults-4.2.0.tgz#d09178716ffea4dde9e5fb7b37f6f0802274580c"
+    integrity sha1-0JF4cW/+pN3p5ft7N/bwgCJ0WAw=
+  
+  lodash.flatten@^4.4.0:
+    version "4.4.0"
+    resolved "https://registry.yarnpkg.com/lodash.flatten/-/lodash.flatten-4.4.0.tgz#f31c22225a9632d2bbf8e4addbef240aa765a61f"
+    integrity sha1-8xwiIlqWMtK7+OSt2+8kCqdlph8=
   
   lodash.includes@^4.3.0:
     version "4.3.0"
@@ -3422,15 +3464,27 @@ Lockfile:
       ora "4.0.1"
       yargs "^14.0.0"
   
-  redis-commands@^1.2.0:
+  redis-commands@1.5.0, redis-commands@^1.2.0:
     version "1.5.0"
     resolved "https://registry.yarnpkg.com/redis-commands/-/redis-commands-1.5.0.tgz#80d2e20698fe688f227127ff9e5164a7dd17e785"
     integrity sha512-6KxamqpZ468MeQC3bkWmCB1fp56XL64D4Kf0zJSwDZbVLLm7KFkoIcHrgRvQ+sk8dnhySs7+yBg94yIkAK7aJg==
+  
+  redis-errors@^1.0.0, redis-errors@^1.2.0:
+    version "1.2.0"
+    resolved "https://registry.yarnpkg.com/redis-errors/-/redis-errors-1.2.0.tgz#eb62d2adb15e4eaf4610c04afe1529384250abad"
+    integrity sha1-62LSrbFeTq9GEMBK/hUpOEJQq60=
   
   redis-parser@^2.6.0:
     version "2.6.0"
     resolved "https://registry.yarnpkg.com/redis-parser/-/redis-parser-2.6.0.tgz#52ed09dacac108f1a631c07e9b69941e7a19504b"
     integrity sha1-Uu0J2srBCPGmMcB+m2mUHnoZUEs=
+  
+  redis-parser@^3.0.0:
+    version "3.0.0"
+    resolved "https://registry.yarnpkg.com/redis-parser/-/redis-parser-3.0.0.tgz#b66d828cdcafe6b4b8a428a7def4c6bcac31c8b4"
+    integrity sha1-tm2CjNyv5rS4pCin3vTGvKwxyLQ=
+    dependencies:
+      redis-errors "^1.0.0"
   
   redis@^2.7.1:
     version "2.8.0"
@@ -3905,6 +3959,11 @@ Lockfile:
     version "0.0.10"
     resolved "https://registry.yarnpkg.com/stack-trace/-/stack-trace-0.0.10.tgz#547c70b347e8d32b4e108ea1a2a159e5fdde19c0"
     integrity sha1-VHxws0fo0ytOEI6hoqFZ5f3eGcA=
+  
+  standard-as-callback@^2.0.1:
+    version "2.0.1"
+    resolved "https://registry.yarnpkg.com/standard-as-callback/-/standard-as-callback-2.0.1.tgz#ed8bb25648e15831759b6023bdb87e6b60b38126"
+    integrity sha512-NQOxSeB8gOI5WjSaxjBgog2QFw55FV8TkS6Y07BiB3VJ8xNTvUYm0wl0s8ObgQ5NhdpnNfigMIKjgPESzgr4tg==
   
   static-extend@^0.1.1:
     version "0.1.2"

@@ -1,5 +1,6 @@
 import { Router } from 'express';
-
+import Brute from 'express-brute';
+import BruteRedis from 'express-brute-redis';
 /**
  * Auxiliary imports
  */
@@ -40,6 +41,12 @@ import validateAppointmentStore from './app/validators/AppointmentStore';
 
 const routes = new Router();
 const upload = multer(multerConfig);
+const bruteStore = new BruteRedis({
+  host: process.env.REDIS_HOST,
+  port: process.env.REDIS_PORT,
+});
+
+const bruteForce = new Brute(bruteStore);
 
 /* User */
 
@@ -48,7 +55,12 @@ routes.get('/users', UserController.index);
 
 /* Session */
 
-routes.post('/sessions', validateSessionStore, SessionController.Store);
+routes.post(
+  '/sessions',
+  bruteForce.prevent,
+  validateSessionStore,
+  SessionController.Store
+);
 
 /**
  * Apply a authentication middleware for next routes
