@@ -25,7 +25,14 @@ import AvaiableController from './app/controllers/AvailableController';
 
 import authMiddleware from './app/middlewares/auth';
 
-7;
+/**
+ * Validations
+ */
+
+import validateUserStore from './app/validators/UserStore';
+import validateUserUpdate from './app/validators/UserUpdate';
+import validateSessionStore from './app/validators/SessionStore';
+import validateAppointmentStore from './app/validators/AppointmentStore';
 
 /**
  * Defining constants and variables
@@ -36,12 +43,12 @@ const upload = multer(multerConfig);
 
 /* User */
 
-routes.post('/users', UserController.store);
+routes.post('/users', validateUserStore, UserController.store);
 routes.get('/users', UserController.index);
 
 /* Session */
 
-routes.post('/sessions', SessionController.Store);
+routes.post('/sessions', validateSessionStore, SessionController.Store);
 
 /**
  * Apply a authentication middleware for next routes
@@ -51,11 +58,15 @@ routes.use(authMiddleware);
 
 /* User */
 
-routes.put('/users', UserController.update);
+routes.put('/users', validateUserUpdate, UserController.update);
 
 /* Appointments */
 
-routes.post('/appointments', AppointmentController.store);
+routes.post(
+  '/appointments',
+  validateAppointmentStore,
+  AppointmentController.store
+);
 routes.get('/appointments', AppointmentController.index);
 routes.delete('/appointments/:id', AppointmentController.delete);
 
